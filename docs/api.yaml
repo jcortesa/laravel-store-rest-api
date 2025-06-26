@@ -1,0 +1,172 @@
+openapi: 3.0.0
+info:
+  title: Technical Assignment Laravel Store REST API
+  description: This is a sample server for Laravel Store REST API.
+  version: 1.0.0
+  license:
+      name: MIT
+      url: https://opensource.org/license/mit/
+servers:
+  - url: https://localhost:3000/api
+tags:
+  - name: store
+    description: Operations related to stores and their products.
+paths:
+  /store:
+    post:
+      tags:
+        - store
+      operationId: createStore
+      summary: Create a new store
+      description: Creates a new store with the provided details, including its products.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Store'
+      responses:
+        "201":
+          description: The created store.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Store'
+    get:
+      tags:
+        - store
+      operationId: listStores
+      summary: List stores
+      description: Returns a list of stores with their products.
+      responses:
+        "200":
+          description: A list of stores with their products.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Store'
+  /store/{storeId}:
+    get:
+      tags:
+        - store
+      operationId: getStore
+      summary: Get a specific store
+      description: Returns details of a specific store including its products.
+      parameters:
+        - name: storeId
+          in: path
+          description: Unique identifier for the store.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Details of the specified store.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Store'
+    put:
+      tags:
+        - store
+      operationId: updateStore
+      summary: Update a store
+      description: Updates the details of a specific store, including its products.
+      parameters:
+        - name: storeId
+          in: path
+          description: Unique identifier for the store.
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Store'
+      responses:
+        "200":
+          description: The updated store.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Store'
+    delete:
+      tags:
+        - store
+      operationId: deleteStore
+      summary: Delete a store
+      description: Deletes a specific store and all its products.
+      parameters:
+        - name: storeId
+          in: path
+          description: Unique identifier for the store.
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: Store deleted successfully, no content returned.
+  /store/{storeId}/product/{productId}/sell:
+    post:
+      tags:
+        - store
+      operationId: sellProduct
+      summary: Sell a product from a store
+      description: Sells a specific product from a store, reducing its quantity.
+      parameters:
+        - name: storeId
+          in: path
+          description: Unique identifier for the store.
+          required: true
+          schema:
+            type: string
+        - name: productId
+          in: path
+          description: Unique identifier for the product.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The updated product after selling.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+components:
+  schemas:
+    Store:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the store.
+          example: "some-store-id-1"
+        name:
+          type: string
+          description: Name of the store.
+          example: "Some Store 1"
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+    Product:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the product.
+          example: "some-product-id-1"
+        name:
+          type: string
+          description: Name of the product.
+          example: "Some Product 1"
+        quantity:
+          type: integer
+          description: Quantity of the product available in the store.
+          example: 42                  
+

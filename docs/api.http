@@ -1,0 +1,58 @@
+### Create a new store
+POST http://localhost:8000/api/stores
+Content-Type: application/json
+Accept: application/json
+
+{
+    "name": "New Shop",
+    "products": [
+        {
+            "id": "some-product-id-1",
+            "name": "Product 1",
+            "quantity": 10
+        },
+        {
+            "id": "some-product-id-2",
+            "name": "Product 2",
+            "quantity": 5
+        }
+    ]
+}
+###
+
+### Get all stores
+GET http://localhost:8000/api/stores
+Accept: application/json
+###
+
+### Get a specific store
+GET http://localhost:8000/api/stores/some-store-id-1
+Accept: application/json
+###
+
+### Update a store
+PUT http://localhost:8000/api/stores/some-store-id-1
+Content-Type: application/json
+Accept: application/json
+
+{
+    "name": "Updated Shop Name",
+    "products": [
+        {
+            "id": "some-product-id-1",
+            "name": "Updated Product 1",
+            "quantity": 20
+        }
+    ]
+}
+###
+
+### Delete a store
+DELETE http://localhost:8000/api/stores/some-store-id-1
+Accept: application/json
+###
+
+### Sell a product from a store
+POST http://localhost:8000/api/stores/some-store-id-1/product/some-product-id-1/sell
+Accept: application/json
+###
