@@ -4,7 +4,13 @@ Content-Type: application/json
 Accept: application/json
 
 {
-    "name": "Some Store Name"
+    "name": "Some Store Name",
+    "products": [
+        {
+            "name": "Sample Product 1",
+            "quantity": 10
+        }
+    ]
 }
 
 > {%

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use App\Models\Store;
+use App\Models\ProductStore;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -13,7 +15,24 @@ class StoreController extends Controller
      */
     public function index(): JsonResponse
     {
-        return response()->json(Store::all());
+        $data = [];
+        $stores = Store::with('products')->get();
+
+        foreach ($stores as $store) {
+            $data[] = [
+                'id' => $store->id,
+                'name' => $store->name,
+                'products' => $store->products->map(function ($product) {
+                    return [
+                        'id' => $product->id,
+                        'name' => $product->name,
+                        'quantity' => $product->pivot->quantity,
+                    ];
+                }),
+            ];
+        }
+
+        return response()->json($data);
     }
 
     /**
@@ -22,7 +41,17 @@ class StoreController extends Controller
     public function store(Request $request): JsonResponse
     {
         $request->validate(['name' => 'required|string|max:255']);
-        Store::factory()->create(['name' => $request->name]);
+        $store = Store::factory()->create(['name' => $request->name]);
+
+        foreach ($request->products as $productRequest) {
+            $product = Product::factory()->create(['name' => $productRequest['name']]);
+
+            ProductStore::factory()->create([
+                'product_id' => $product->id,
+                'store_id' => $store->id,
+                'quantity' => $productRequest['quantity'] ?? 0,
+            ]);
+        }
 
         return response()->json(['message' => 'Store created successfully'], 201);
     }
