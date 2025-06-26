@@ -9,17 +9,27 @@ You can find me on:
 ## Requirements
 
 - Docker Desktop
+- Composer v2.0 or higher
 
 ## Installation
+Clone repository:
 ```sh
 git clone https://github.com/jcortesa/laravel-store-rest-api
 cd laravel-store-rest-api
-
-./vendor/bin/sail up -d
-./vendor/bin/sail cache:table
-./vendor/bin/sail migrate
-./vendor/bin/sail cache:clear
 ```
+
+Create a `.env` file by copying the example file:
+```sh
+cp .env.example .env
+```
+
+Install dependencies and start the application using Laravel Sail:
+```sh
+composer install
+./vendor/bin/sail up -d
+```
+
+In browser, navigate to `http://localhost` to access the API.
 
 ## API Endpoints
 The API provides the following endpoints, preliminarly:
