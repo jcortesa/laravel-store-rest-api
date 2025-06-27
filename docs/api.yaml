@@ -111,32 +111,43 @@ paths:
         "204":
           description: Store deleted successfully, no content returned.
   /stores/{storeId}/products/{productId}/sell:
-    post:
+    put:
       tags:
         - store
       operationId: sellProduct
       summary: Sell a product from a store
-      description: Sells a specific product from a store, reducing its quantity.
+      description: Sells a specific product from a store, reducing its quantity if enough stock.
       parameters:
         - name: storeId
           in: path
           description: Unique identifier for the store.
           required: true
           schema:
-            type: string
+            type: integer
         - name: productId
           in: path
           description: Unique identifier for the product.
           required: true
           schema:
-            type: string
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                quantity:
+                  type: integer
+                  description: The quantity of the product to sell.
+                  example: 1
       responses:
         "200":
+          description: The updated product after selling, but low stock warning.
+        "204":
           description: The updated product after selling.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Product'
+        "400":
+          description: Insufficient stock, sell cannot be made.
 components:
   schemas:
     Store:

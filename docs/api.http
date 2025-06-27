@@ -40,7 +40,7 @@ Accept: application/json
 %}
 
 ### Update a store
-PUT http://localhost/api/stores/1
+PUT http://localhost/api/stores/2
 Content-Type: application/json
 Accept: application/json
 
@@ -48,7 +48,7 @@ Accept: application/json
     "name": "Updated Shop Name",
     "products": [
         {
-            "id": "1",
+            "id": "2",
             "name": "Updated Product 42",
             "quantity": 21
         }
@@ -79,7 +79,7 @@ Content-Type: application/json
 Accept: application/json
 
 {
-    "quantity": 2
+    "quantity": 1
 }
 
 

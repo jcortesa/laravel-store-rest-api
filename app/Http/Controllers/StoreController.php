@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 
 class StoreController extends Controller
 {
+    private CONST LOW_STOCK_THRESHOLD = 5;
+
     /**
      * Display a listing of the resource.
      */
@@ -116,10 +118,32 @@ class StoreController extends Controller
     {
         $request->validate(['quantity' => 'required|integer|min:1']);
 
+        $currentStock = ProductStore::where('product_id', $productId)
+            ->where('store_id', $storeId)
+            ->value('quantity');
+
+        if ($currentStock < $request->quantity) {
+            return response()->json(['message' => "Insufficient stock ($currentStock units), sell cannot be made."], 400);
+        }
+
         ProductStore::where('product_id', $productId)
             ->where('store_id', $storeId)
             ->decrement('quantity', $request->quantity);
 
-        return response()->json(['message' => 'Sell done successfully'], 204);
+        $currentStock = ProductStore::where('product_id', $productId)
+            ->where('store_id', $storeId)
+            ->value('quantity');
+
+        $data = [
+            'message' => 'Sell done successfully',
+        ];
+
+        if ($currentStock <= self::LOW_STOCK_THRESHOLD) {
+            $data['message'] .= " Low stock ($currentStock units), please restock soon.";
+
+            return response()->json($data, 200);
+        }
+
+        return response()->json(null, 204);
     }
 }
