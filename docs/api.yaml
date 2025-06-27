@@ -110,7 +110,7 @@ paths:
       responses:
         "204":
           description: Store deleted successfully, no content returned.
-  /stores/{storeId}/product/{productId}/sell:
+  /stores/{storeId}/products/{productId}/sell:
     post:
       tags:
         - store

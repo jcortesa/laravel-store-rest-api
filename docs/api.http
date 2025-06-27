@@ -74,6 +74,17 @@ Accept: application/json
 %}
 
 ### Sell a product from a store
-POST http://localhost/api/stores/1/product/some-product-id-1/sell
+PUT http://localhost/api/stores/2/products/2/sell
+Content-Type: application/json
 Accept: application/json
-###
+
+{
+    "quantity": 2
+}
+
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 204, "Response status is not 204");
+    });
+%}

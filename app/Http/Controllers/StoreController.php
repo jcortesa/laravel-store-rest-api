@@ -111,4 +111,15 @@ class StoreController extends Controller
 
         return response()->json(['message' => 'Store deleted successfully'], 204);
     }
+
+    public function sellProductStore(Request $request, int $storeId, int $productId): JsonResponse
+    {
+        $request->validate(['quantity' => 'required|integer|min:1']);
+
+        ProductStore::where('product_id', $productId)
+            ->where('store_id', $storeId)
+            ->decrement('quantity', $request->quantity);
+
+        return response()->json(['message' => 'Sell done successfully'], 204);
+    }
 }
