@@ -54,12 +54,24 @@ Accept: application/json
         }
     ]
 }
-###
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 204, "Response status is not 204");
+    });
+%}
+
+
 
 ### Delete a store
-DELETE http://localhost/api/stores/1
+DELETE http://localhost/api/stores/3
 Accept: application/json
-###
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 204, "Response status is not 204");
+    });
+%}
 
 ### Sell a product from a store
 POST http://localhost/api/stores/1/product/some-product-id-1/sell

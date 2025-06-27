@@ -107,6 +107,8 @@ class StoreController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Store::with('products')->find($id)->delete();
+
+        return response()->json(['message' => 'Store deleted successfully'], 204);
     }
 }
