@@ -18,6 +18,7 @@ class StoreController extends Controller
     public function index(): JsonResponse
     {
         $data = [];
+        /** @var list<Store> $stores */
         $stores = Store::with('products')->get();
 
         foreach ($stores as $store) {
@@ -76,7 +77,7 @@ class StoreController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(int $id)
+    public function show(int $id): JsonResponse
     {
         $data = [];
         $store = Store::with('products')->find($id);
@@ -146,7 +147,7 @@ class StoreController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(int $id)
+    public function destroy(int $id): JsonResponse
     {
         if (null === Store::with('products')->find($id)) {
             return response()->json(['message' => 'Store not found'], 404);
