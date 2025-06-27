@@ -135,7 +135,6 @@ class StoreController extends Controller
                     'quantity' => $productRequest['quantity']
                 ]);
             } else {
-                // @TODO fix composite primary key of ProductStore in order to update
                 $productStore->quantity = $productRequest['quantity'];
                 $productStore->save();
             }
