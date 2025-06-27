@@ -41,5 +41,12 @@ The API provides the following endpoints, preliminarly:
 - `DELETE /store/{id}`: Delete a store by ID.
 - `POST /store/{storeId}/product/{productId}/sell`: Sell a product from a store. This endpoint will update the stock of the product and return the updated product details.
 
+## Analyze code
+Making use of [PHPStan](https://phpstan.org/) to analyze the code quality, run the following command:
+
+```sh
+./vendor/bin/sail bin phpstan analyze
+```
+
 ## License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details
