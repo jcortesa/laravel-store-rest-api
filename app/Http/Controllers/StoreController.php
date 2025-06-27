@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Store;
 use App\Models\ProductStore;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -26,10 +27,13 @@ class StoreController extends Controller
                 'id' => $store->id,
                 'name' => $store->name,
                 'products' => $store->products->map(function ($product) {
+                    /** @var ProductStore $pivot */
+                    $pivot = $product->pivot;
+
                     return [
                         'id' => $product->id,
                         'name' => $product->name,
-                        'quantity' => $product->pivot->quantity,
+                        'quantity' => $pivot->quantity,
                     ];
                 }),
             ];
@@ -90,10 +94,13 @@ class StoreController extends Controller
             'id' => $store->id,
             'name' => $store->name,
             'products' => $store->products->map(function ($product) {
+                /** @var ProductStore $pivot */
+                $pivot = $product->pivot;
+
                 return [
                     'id' => $product->id,
                     'name' => $product->name,
-                    'quantity' => $product->pivot->quantity,
+                    'quantity' => $pivot->quantity,
                 ];
             }),
         ];
