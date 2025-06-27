@@ -1,13 +1,50 @@
-### Create a new store
+### Create a new store without products
 POST http://localhost/api/stores
 Content-Type: application/json
 Accept: application/json
 
 {
-    "name": "Some Store Name",
+    "name": "Some Store Name {{$timestamp}}"
+}
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 201, "Response status is not 201");
+    });
+%}
+
+### Create a new store with new products
+POST http://localhost/api/stores
+Content-Type: application/json
+Accept: application/json
+
+{
+    "name": "Some Store Name {{$timestamp}}",
     "products": [
         {
-            "name": "Sample Product 1",
+            "name": "Sample Product {{$timestamp}}",
+            "quantity": 10
+        }
+    ]
+}
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 201, "Response status is not 201");
+    });
+%}
+
+### Create a new store with existing products
+POST http://localhost/api/stores
+Content-Type: application/json
+Accept: application/json
+
+{
+    "name": "Some Store Name {{$timestamp}}",
+    "products": [
+        {
+            "id": 1,
+            "name": "Sample Product {{$timestamp}}",
             "quantity": 10
         }
     ]
@@ -30,7 +67,7 @@ Accept: application/json
 %}
 
 ### Get a specific store
-GET http://localhost/api/stores/1
+GET http://localhost/api/stores/2
 Accept: application/json
 
 > {%
@@ -48,9 +85,13 @@ Accept: application/json
     "name": "Updated Shop Name",
     "products": [
         {
-            "id": "2",
-            "name": "Updated Product 42",
+            "id": 1,
+            "name": "Updated Product 16",
             "quantity": 21
+        },
+        {
+            "name": "New Product 1337",
+            "quantity": 13343
         }
     ]
 }
@@ -61,10 +102,8 @@ Accept: application/json
     });
 %}
 
-
-
 ### Delete a store
-DELETE http://localhost/api/stores/3
+DELETE http://localhost/api/stores/8
 Accept: application/json
 
 > {%
@@ -79,7 +118,7 @@ Content-Type: application/json
 Accept: application/json
 
 {
-    "quantity": 1
+    "quantity": 17
 }
 
 

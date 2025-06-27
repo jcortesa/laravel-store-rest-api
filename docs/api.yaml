@@ -27,11 +27,9 @@ paths:
               $ref: '#/components/schemas/Store'
       responses:
         "201":
-          description: The created store.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Store'
+          description: Store created successfully.
+        "422":
+          description: Validation error, the request body is not valid.
     get:
       tags:
         - store
@@ -157,6 +155,7 @@ components:
           type: integer
           description: Unique identifier for the store.
           example: 1
+          readOnly: true
         name:
           type: string
           description: Name of the store.
@@ -172,6 +171,7 @@ components:
           type: integer
           description: Unique identifier for the product.
           example: 1
+          readOnly: true
         name:
           type: string
           description: Name of the product.
