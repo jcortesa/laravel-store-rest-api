@@ -61,7 +61,22 @@ class StoreController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data = [];
+        $store = Store::with('products')->find($id);
+
+        $data[] = [
+            'id' => $store->id,
+            'name' => $store->name,
+            'products' => $store->products->map(function ($product) {
+                return [
+                    'id' => $product->id,
+                    'name' => $product->name,
+                    'quantity' => $product->pivot->quantity,
+                ];
+            }),
+        ];
+
+        return response()->json($data);
     }
 
     /**
