@@ -143,9 +143,9 @@ components:
       type: object
       properties:
         id:
-          type: string
+          type: integer
           description: Unique identifier for the store.
-          example: "some-store-id-1"
+          example: 1
         name:
           type: string
           description: Name of the store.
@@ -158,9 +158,9 @@ components:
       type: object
       properties:
         id:
-          type: string
+          type: integer
           description: Unique identifier for the product.
-          example: "some-product-id-1"
+          example: 1
         name:
           type: string
           description: Name of the product.

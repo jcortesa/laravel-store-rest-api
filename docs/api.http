@@ -48,9 +48,9 @@ Accept: application/json
     "name": "Updated Shop Name",
     "products": [
         {
-            "id": "some-product-id-1",
-            "name": "Updated Product 1",
-            "quantity": 20
+            "id": "1",
+            "name": "Updated Product 42",
+            "quantity": 21
         }
     ]
 }

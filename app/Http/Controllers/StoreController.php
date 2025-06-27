@@ -82,9 +82,24 @@ class StoreController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id): JsonResponse
     {
-        //
+        $request->validate(['name' => 'required|string|max:255']);
+        Store::with('products')->find($id)->update(['name' => $request->name]);
+
+        foreach ($request->products as $productRequest) {
+            Product::find($productRequest['id'])->update([
+               'name' => $productRequest['name'],
+            ]);
+
+            ProductStore::where('product_id', $productRequest['id'])
+                ->where('store_id', $id)
+                ->update([
+                    'quantity' => $productRequest['quantity'] ?? 0,
+                ]);
+        }
+
+        return response()->json(['message' => 'Store updated successfully'], 204);
     }
 
     /**
