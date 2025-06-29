@@ -36,6 +36,8 @@ class StoreStoreController
             );
         }
 
+        \Cache::flush();
+
         return response()->json(['message' => 'Store created successfully'], 201);
     }
 }

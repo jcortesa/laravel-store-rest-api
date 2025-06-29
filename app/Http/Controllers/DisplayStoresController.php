@@ -19,26 +19,29 @@ class DisplayStoresController
      */
     public function __invoke(): JsonResponse
     {
-        $data = [];
-        /** @var list<Store> $stores */
-        $stores = Store::with('products')->get();
+        $data = cache()->remember('stores_with_products', 60, function () {
+            $result = [];
+            /** @var list<Store> $stores */
+            $stores = Store::with('products')->get();
 
-        foreach ($stores as $store) {
-            $data[] = [
-                'id' => $store->id,
-                'name' => $store->name,
-                'products' => $store->products->map(function ($product) {
-                    /** @var ProductStore $pivot */
-                    $pivot = $product->pivot;
+            foreach ($stores as $store) {
+                $result[] = [
+                    'id' => $store->id,
+                    'name' => $store->name,
+                    'products' => $store->products->map(function ($product) {
+                        /** @var ProductStore $pivot */
+                        $pivot = $product->pivot;
 
-                    return [
-                        'id' => $product->id,
-                        'name' => $product->name,
-                        'quantity' => $pivot->quantity,
-                    ];
-                }),
-            ];
-        }
+                        return [
+                            'id' => $product->id,
+                            'name' => $product->name,
+                            'quantity' => $pivot->quantity,
+                        ];
+                    }),
+                ];
+            }
+            return $result;
+        });
 
         return response()->json($data);
     }
