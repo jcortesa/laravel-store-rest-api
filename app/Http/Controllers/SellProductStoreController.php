@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 
 class SellProductStoreController
 {
-    private CONST LOW_STOCK_THRESHOLD = 5;
+    private const LOW_STOCK_THRESHOLD = 5;
 
     public function __invoke(SellProductStoreRequest $request, int $storeId, int $productId): JsonResponse
     {

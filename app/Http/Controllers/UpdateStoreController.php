@@ -24,8 +24,8 @@ class UpdateStoreController
         foreach ($request->products ?? [] as $productRequest) {
             $product = Product::updateOrCreate(
                 ['id' => $productRequest['id'] ?? null],
-                ['name' => $productRequest['name'],
-                ]);
+                ['name' => $productRequest['name']]
+            );
 
             $productStore = ProductStore::where('product_id', $product->id)
                 ->where('store_id', $id)
