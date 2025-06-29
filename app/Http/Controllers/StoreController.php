@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SellProductStoreRequest;
+use App\Http\Requests\StoreStoreRequest;
+use App\Http\Requests\UpdateStoreRequest;
 use App\Models\Product;
 use App\Models\Store;
 use App\Models\ProductStore;
@@ -45,15 +48,8 @@ class StoreController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): JsonResponse
+    public function store(StoreStoreRequest $request): JsonResponse
     {
-        $request->validate([
-            'name' => 'bail|required|string|max:255',
-            'products' => 'array',
-            'products.*.name' => 'required|string|max:255',
-            'products.*.quantity' => 'required|integer|min:0',
-        ]);
-
         $store = Store::factory()->create(['name' => $request->name]);
 
         foreach ($request->products ?? [] as $productRequest) {
@@ -111,18 +107,11 @@ class StoreController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, int $id): JsonResponse
+    public function update(UpdateStoreRequest $request, int $id): JsonResponse
     {
         if (null === Store::with('products')->find($id)) {
             return response()->json(['message' => 'Store not found'], 404);
         }
-
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'products' => 'array',
-            'products.*.name' => 'required|string|max:255',
-            'products.*.quantity' => 'required|integer|min:0',
-        ]);
 
         Store::with('products')->find($id)->update(['name' => $request->name]);
 
@@ -165,7 +154,7 @@ class StoreController extends Controller
         return response()->json(['message' => 'Store deleted successfully'], 204);
     }
 
-    public function sellProductStore(Request $request, int $storeId, int $productId): JsonResponse
+    public function sellProductStore(SellProductStoreRequest $request, int $storeId, int $productId): JsonResponse
     {
         $productStore = ProductStore::where('product_id', $productId)
             ->where('store_id', $storeId)
@@ -175,7 +164,7 @@ class StoreController extends Controller
             return response()->json(['message' => 'Product not found in store'], 404);
         }
 
-        $request->validate(['quantity' => 'required|integer|min:1']);
+        /** @var int $currentStock */
         $currentStock = $productStore->quantity;
 
         if ($currentStock < $request->quantity) {
@@ -186,6 +175,7 @@ class StoreController extends Controller
             ->where('store_id', $storeId)
             ->decrement('quantity', $request->quantity);
 
+        /** @var int $currentStock */
         $currentStock = ProductStore::where('product_id', $productId)
             ->where('store_id', $storeId)
             ->value('quantity');
