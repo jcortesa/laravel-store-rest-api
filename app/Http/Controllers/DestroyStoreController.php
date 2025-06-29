@@ -18,8 +18,6 @@ class DestroyStoreController
 
         Store::with('products')->find($id)->delete();
 
-        \Cache::flush();
-
         return response()->json(['message' => 'Store deleted successfully'], 204);
     }
 }

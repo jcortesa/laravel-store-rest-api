@@ -43,8 +43,6 @@ class UpdateStoreController
             }
         }
 
-        \Cache::flush();
-
         return response()->json(['message' => 'Store updated successfully'], 204);
     }
 }

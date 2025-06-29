@@ -31,8 +31,6 @@ class SellProductStoreController
             ->where('store_id', $storeId)
             ->decrement('quantity', $request->quantity);
 
-        \Cache::flush();
-
         /** @var int $currentStock */
         $currentStock = ProductStore::where('product_id', $productId)
             ->where('store_id', $storeId)
