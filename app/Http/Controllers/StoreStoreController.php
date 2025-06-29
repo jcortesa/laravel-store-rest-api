@@ -8,12 +8,12 @@ use App\Models\Store;
 use App\Models\ProductStore;
 use Illuminate\Http\JsonResponse;
 
-class StoreController extends Controller
+class StoreStoreController extends Controller
 {
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreStoreRequest $request): JsonResponse
+    public function __invoke(StoreStoreRequest $request): JsonResponse
     {
         $store = Store::factory()->create(['name' => $request->name]);
 
