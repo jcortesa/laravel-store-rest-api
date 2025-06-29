@@ -38,34 +38,4 @@ class StoreController extends Controller
 
         return response()->json(['message' => 'Store created successfully'], 201);
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(int $id): JsonResponse
-    {
-        $data = [];
-        $store = Store::with('products')->find($id);
-
-        if (!$store) {
-            return response()->json(['message' => 'Store not found'], 404);
-        }
-
-        $data[] = [
-            'id' => $store->id,
-            'name' => $store->name,
-            'products' => $store->products->map(function ($product) {
-                /** @var ProductStore $pivot */
-                $pivot = $product->pivot;
-
-                return [
-                    'id' => $product->id,
-                    'name' => $product->name,
-                    'quantity' => $pivot->quantity,
-                ];
-            }),
-        ];
-
-        return response()->json($data);
-    }
 }
