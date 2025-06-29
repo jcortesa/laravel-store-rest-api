@@ -12,35 +12,6 @@ use Illuminate\Http\JsonResponse;
 class StoreController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
-    public function index(): JsonResponse
-    {
-        $data = [];
-        /** @var list<Store> $stores */
-        $stores = Store::with('products')->get();
-
-        foreach ($stores as $store) {
-            $data[] = [
-                'id' => $store->id,
-                'name' => $store->name,
-                'products' => $store->products->map(function ($product) {
-                    /** @var ProductStore $pivot */
-                    $pivot = $product->pivot;
-
-                    return [
-                        'id' => $product->id,
-                        'name' => $product->name,
-                        'quantity' => $pivot->quantity,
-                    ];
-                }),
-            ];
-        }
-
-        return response()->json($data);
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(StoreStoreRequest $request): JsonResponse
