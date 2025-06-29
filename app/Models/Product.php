@@ -32,9 +32,14 @@ use Illuminate\Support\Carbon;
  */
 class Product extends Model
 {
+    /** @use HasFactory<ProductFactory> */
     use HasFactory;
+
     protected $fillable = ['name'];
 
+    /**
+     * @return BelongsToMany<Store, $this, Pivot, 'pivot'>
+     */
     public function stores(): BelongsToMany
     {
         return $this->belongsToMany(Store::class, 'product_store')->withPivot('quantity');

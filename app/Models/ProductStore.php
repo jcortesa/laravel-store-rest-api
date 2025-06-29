@@ -30,7 +30,9 @@ use Illuminate\Support\Carbon;
  */
 class ProductStore extends Model
 {
+    /** @use HasFactory<ProductStoreFactory> */
     use HasFactory;
+
     protected $table = 'product_store';
     protected $fillable = ['store_id', 'product_id', 'quantity'];
 }

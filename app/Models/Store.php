@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Support\Carbon;
 
 /**
@@ -32,9 +33,14 @@ use Illuminate\Support\Carbon;
  */
 class Store extends Model
 {
+    /** @use HasFactory<StoreFactory> */
     use HasFactory;
+
     protected $fillable = ['name'];
 
+    /**
+     * @return BelongsToMany<Product, $this, Pivot, 'pivot'>
+     */
     public function products(): BelongsToMany
     {
         return $this->belongsToMany(Product::class, 'product_store')->withPivot('quantity');
