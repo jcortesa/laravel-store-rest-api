@@ -8,7 +8,7 @@ use App\Models\Store;
 use App\Models\ProductStore;
 use Illuminate\Http\JsonResponse;
 
-class StoreStoreController extends Controller
+class StoreStoreController
 {
     /**
      * Store a newly created resource in storage.

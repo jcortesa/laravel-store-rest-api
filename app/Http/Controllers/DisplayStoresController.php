@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class DisplayStoresController extends Controller
+class DisplayStoresController
 {
     /**
      * Display a listing of the resource.

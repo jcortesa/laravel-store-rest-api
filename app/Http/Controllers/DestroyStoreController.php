@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class DestroyStoreController extends Controller
+class DestroyStoreController
 {
     /**
      * Remove the specified resource from storage.

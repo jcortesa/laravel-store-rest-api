@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class SellProductStoreController extends Controller
+class SellProductStoreController
 {
     private CONST LOW_STOCK_THRESHOLD = 5;
 
