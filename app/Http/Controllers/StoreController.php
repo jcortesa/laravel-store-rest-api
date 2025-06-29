@@ -105,18 +105,4 @@ class StoreController extends Controller
 
         return response()->json(['message' => 'Store updated successfully'], 204);
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(int $id): JsonResponse
-    {
-        if (null === Store::with('products')->find($id)) {
-            return response()->json(['message' => 'Store not found'], 404);
-        }
-
-        Store::with('products')->find($id)->delete();
-
-        return response()->json(['message' => 'Store deleted successfully'], 204);
-    }
 }
