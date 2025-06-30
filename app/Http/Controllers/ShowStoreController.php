@@ -21,7 +21,7 @@ class ShowStoreController
                 return null;
             }
 
-            return [[
+            return [
                 'id' => $store->id,
                 'name' => $store->name,
                 'products' => $store->products->map(function ($product) {
@@ -34,7 +34,7 @@ class ShowStoreController
                         'quantity' => $pivot->quantity,
                     ];
                 }),
-            ]];
+            ];
         });
 
         if (!$data) {
