@@ -32,27 +32,30 @@ composer install
 In browser, navigate to `http://localhost` to access the API.
 
 ## API Endpoints
-The API provides the following endpoints, preliminarly:
+The API provides the following endpoints:
 
-- `POST /store`: Create a new store. Pass a collection of products in the request body to associate them with the store.
-- `GET /store`: Retrieve a list of all stores.
-- `GET /store/{id}`: Retrieve a specific store by ID.
-- `PUT /store/{id}`: Update an existing store by ID.
-- `DELETE /store/{id}`: Delete a store by ID.
-- `POST /store/{storeId}/product/{productId}/sell`: Sell a product from a store. This endpoint will update the stock of the product and return the updated product details.
+- `POST /api/stores`: Create a new store. Pass a collection of products in the request body to associate them with the store.
+- `GET /api/stores`: Retrieve a list of all stores.
+- `GET /api/stores/{id}`: Retrieve a specific store by ID.
+- `PUT /api/stores/{id}`: Update an existing store by ID.
+- `DELETE /api/stores/{id}`: Delete a store by ID.
+- `PUT /api/stores/{storeId}/products/{productId}/sell`: Sell a product from a store. This endpoint will update the stock of the product and return the updated product details.
 
-## Analyze code
-Making use of [PHPStan](https://phpstan.org/) to analyze the code quality, run the following command:
-
-```sh
-./vendor/bin/sail bin phpstan analyze
-```
+See specification on `docs/api.yaml`. 
+Test it also with `docs/api.http` using [HTTP Client](https://www.jetbrains.com/help/phpstorm/http-client-in-product-code-editor.html) by JetBrains.
 
 ## Testing
 To run the tests, use the following command:
 
 ```sh
 ./vendor/bin/sail artisan test
+```
+
+## Code static analysis
+Making use of [PHPStan](https://phpstan.org/) to analyze the code quality, run the following command:
+
+```sh
+./vendor/bin/sail bin phpstan analyze
 ```
 
 ## License
