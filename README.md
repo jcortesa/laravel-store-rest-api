@@ -48,5 +48,12 @@ Making use of [PHPStan](https://phpstan.org/) to analyze the code quality, run t
 ./vendor/bin/sail bin phpstan analyze
 ```
 
+## Testing
+To run the tests, use the following command:
+
+```sh
+./vendor/bin/sail artisan test
+```
+
 ## License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details
