@@ -6,7 +6,7 @@ namespace App\Observers;
 
 use App\Models\Store;
 
-class StoreObserver
+final class StoreObserver
 {
     public function saved(Store $store): void
     {

@@ -33,7 +33,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|Store whereUpdatedAt($value)
  * @mixin Eloquent
  */
-class Store extends Model
+final class Store extends Model
 {
     /** @use HasFactory<StoreFactory> */
     use HasFactory;

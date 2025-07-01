@@ -9,7 +9,7 @@ use Illuminate\Foundation\Http\FormRequest;
 /**
  * @property int $quantity
  */
-class SellProductStoreRequest extends FormRequest
+final class SellProductStoreRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.

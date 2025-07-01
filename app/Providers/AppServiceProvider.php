@@ -12,7 +12,7 @@ use App\Observers\ProductStoreObserver;
 use App\Observers\StoreObserver;
 use Illuminate\Support\ServiceProvider;
 
-class AppServiceProvider extends ServiceProvider
+final class AppServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.

@@ -14,7 +14,7 @@ use Illuminate\Foundation\Http\FormRequest;
  *     quantity: int
  * }> $products
  */
-class UpdateStoreRequest extends FormRequest
+final class UpdateStoreRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.

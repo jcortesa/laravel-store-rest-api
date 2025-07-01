@@ -10,7 +10,7 @@ use App\Models\Store;
 use App\Models\ProductStore;
 use Illuminate\Http\JsonResponse;
 
-class StoreStoreController
+final class StoreStoreController
 {
     /**
      * Store a newly created resource in storage.

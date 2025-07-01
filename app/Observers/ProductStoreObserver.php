@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Observers;
 
-class ProductStoreObserver
+final class ProductStoreObserver
 {
     public function saved(): void
     {

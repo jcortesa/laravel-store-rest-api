@@ -8,7 +8,7 @@ use App\Http\Requests\SellProductStoreRequest;
 use App\Models\ProductStore;
 use Illuminate\Http\JsonResponse;
 
-class SellProductStoreController
+final class SellProductStoreController
 {
     private const LOW_STOCK_THRESHOLD = 5;
 

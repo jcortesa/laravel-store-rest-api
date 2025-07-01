@@ -10,7 +10,7 @@ use App\Models\Store;
 use App\Models\ProductStore;
 use Illuminate\Http\JsonResponse;
 
-class UpdateStoreController
+final class UpdateStoreController
 {
     /**
      * Update the specified resource in storage.

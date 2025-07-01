@@ -8,7 +8,7 @@ use App\Models\Store;
 use App\Models\ProductStore;
 use Illuminate\Http\JsonResponse;
 
-class ShowStoreController
+final class ShowStoreController
 {
     /**
      * Display the specified resource.

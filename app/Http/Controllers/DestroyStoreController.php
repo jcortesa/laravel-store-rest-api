@@ -6,7 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\Store;
 use Illuminate\Http\JsonResponse;
 
-class DestroyStoreController
+final class DestroyStoreController
 {
     /**
      * Remove the specified resource from storage.
