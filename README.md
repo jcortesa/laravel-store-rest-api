@@ -1,3 +1,5 @@
+# laravel-store-rest-api
+
 ## Introduction
 This repository contains a REST API built with Laravel, designed to manage a collection of stores and products. 
 The API allows users to perform CRUD operations on stores and products, including creating, reading, updating, and deleting data.
